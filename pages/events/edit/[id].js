@@ -1,13 +1,20 @@
+// Dependencies
 import moment from 'moment';
 import { FaImage } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+// React and Next JS
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
+
+// Components
 import Layout from '@/components/Layout';
 import Modal from '@/components/Modal';
+import ImageUpload from '@/components/ImageUpload';
+
 import { API_URL } from '@/config/index';
 import styles from '@/styles/Form.module.css';
 
@@ -60,12 +67,19 @@ export default function EditEventPage({ evt }) {
     setValues({ ...values, [name]: value });
   };
 
+  const imageUploaded = async () => {
+    const res = await fetch(`${API_URL}/events/${evt.id}`);
+    const data = await res.json();
+    setImagePreview(data.image.formats.thumbnail);
+    setShowModal(false);
+  };
+
   return (
-    <Layout title="Add event">
-      <Link href="/events">{'< Go Back'}</Link>
+    <Layout title="Add New Event">
+      <Link href="/events">Go Back</Link>
       <h1>Edit Event</h1>
       <ToastContainer />
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.grid}>
           <div>
             <label htmlFor="name">Event Name</label>
@@ -153,13 +167,16 @@ export default function EditEventPage({ evt }) {
       )}
 
       <div>
-        <button onClick={() => setShowModal(true)} className="btn-secondary">
+        <button
+          onClick={() => setShowModal(true)}
+          className="btn-secondary btn-icon"
+        >
           <FaImage /> Set Image
         </button>
       </div>
 
       <Modal show={showModal} onClose={() => setShowModal(false)}>
-        Image Upload
+        <ImageUpload evtId={evt.id} imageUploaded={imageUploaded} />
       </Modal>
     </Layout>
   );
