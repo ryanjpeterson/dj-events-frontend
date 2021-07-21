@@ -1,0 +1,23 @@
+.paginationBar {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.paginationBar a {
+  margin: 0;
+}
+
+.paginationRow {
+  flex: 1;
+}
+
+.paginationRow:nth-child(1) {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.paginationRow:nth-child(2) {
+  display: flex;
+  justify-content: flex-end;
+}
