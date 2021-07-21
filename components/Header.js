@@ -1,3 +1,4 @@
+import { FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
 import Link from 'next/link';
 import Search from './Search';
 import styles from '../styles/Header.module.css';
@@ -22,6 +23,14 @@ export default function Header() {
           </li>
           <li>
             <Link href="/events/add">Add Event</Link>
+          </li>
+          <li>
+            <Link href="/account/login">
+              <a className="btn-secondary btn-icon">
+                <FaSignInAlt />
+                Login
+              </a>
+            </Link>
           </li>
         </ul>
       </nav>
