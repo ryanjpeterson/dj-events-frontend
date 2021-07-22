@@ -11,7 +11,7 @@ export default function SearchPage({ events }) {
   return (
     <Layout title="Search Results">
       <Link href="/events">{'< Go Back'}</Link>
-      <h1>Search results for '{router.query.term}'</h1>
+      <h1>Search results for &apos;{router.query.term}&apos;</h1>
       {events.length === 0 && <h3>No events... bummer...</h3>}
 
       {events.map((evt) => (
